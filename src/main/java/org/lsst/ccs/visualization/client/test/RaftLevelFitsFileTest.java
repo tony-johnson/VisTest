@@ -20,15 +20,15 @@ import org.lsst.ccs.visualization.message.StartMessage;
 public class RaftLevelFitsFileTest {
 
     public static void main(String[] args) throws FitsException, IOException, InterruptedException, ExecutionException, BrokenBarrierException {
-        File dir = new File("/home/tonyj/Data/raft");
-        String imageName = "r99_fe55_test_000_20160628175107";
+        File dir = new File(args[0]);
+        String imageName = args[1];
         List<CCDThread> threads = new ArrayList<>();
 
         Runnable barrierAction = new Runnable() {
             private int ccdHeight;
             private int ccdWidth;
             private boolean first = true;
-            private IngestClient client = new IngestClient("localhost",9999);
+            private final IngestClient client = new IngestClient("localhost",9999);
             private int raftWidth;
             private int raftHeight;
             private long begin = System.currentTimeMillis();
